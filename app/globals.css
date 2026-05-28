@@ -125,6 +125,24 @@
   }
 }
 
+/* Task 1 — utilities */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .oracle-nav-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: rgba(212, 165, 160, 0.85);
+  }
+}
+
 /* =========================================
    Crystal Ball Animation
 ========================================= */
