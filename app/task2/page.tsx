@@ -65,28 +65,26 @@ function FloatingEmbers() {
 
 function CrystalFocus() {
   return (
-    <motion.div
-      className="pointer-events-none absolute left-1/2 z-20 flex justify-center items-center"
-      style={{
-        top: 'clamp(250px, 42vh, 430px)',
-        translateX: '-50%',
-      }}
-      initial={false}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      className="crystal-ball-anchor pointer-events-none absolute left-1/2 z-20 flex justify-center items-center"
+      style={{ top: 'clamp(26vh, 34vh, 38vh)' }}
     >
       <div className="crystal-ball-container">
-        <div className="crystal-glow"></div>
-        <div className="crystal-base"></div>
-        <svg
-          viewBox="0 0 120 120"
-          className="magic-circle"
-        >
+        <div className="crystal-ball-glow" aria-hidden />
+        <div className="crystal-ball-glow crystal-ball-glow--outer" aria-hidden />
+        <img
+          src="/crystal-ball-pentagram.png"
+          alt=""
+          className="crystal-ball-img"
+          draggable={false}
+        />
+
+        <svg viewBox="0 0 120 120" className="magic-circle" aria-hidden>
           <defs>
             <linearGradient id="oracle-line" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.72" />
-              <stop offset="50%" stopColor="#dcb8ff" stopOpacity="0.86" />
-              <stop offset="100%" stopColor="#8d45d6" stopOpacity="0.72" />
+              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.58" />
+              <stop offset="50%" stopColor="#dcb8ff" stopOpacity="0.68" />
+              <stop offset="100%" stopColor="#8d45d6" stopOpacity="0.58" />
             </linearGradient>
           </defs>
           <path
@@ -98,8 +96,12 @@ function CrystalFocus() {
           <circle cx="60" cy="60" r="42" fill="none" stroke="url(#oracle-line)" strokeWidth="1.4" />
           <circle cx="60" cy="60" r="23" fill="none" stroke="rgba(255,255,255,0.28)" strokeWidth="1" />
         </svg>
+
+        <div className="crystal-inner-pulse" />
+        <div className="crystal-sphere-depth" aria-hidden />
+        <div className="crystal-pedestal-glow" aria-hidden />
       </div>
-    </motion.div>
+    </div>
   )
 }
 
@@ -185,12 +187,12 @@ function QuestionPanel() {
     <motion.section
       className="relative z-30 mx-auto flex w-full max-w-[760px] flex-col items-center px-4"
       style={{ marginTop: 'clamp(250px, 42vh, 400px)' }}
-      initial={false}
+      initial={{ opacity: 0, y: 28 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, delay: 0.42 }}
+      transition={{ duration: 0.9, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
     >
       <div
-        className="relative w-full overflow-hidden rounded-[18px] border px-7 py-6 shadow-[0_28px_70px_rgba(0,0,0,0.62)]"
+        className="oracle-glass-panel relative w-full overflow-hidden rounded-[18px] border px-7 py-6 shadow-[0_28px_70px_rgba(0,0,0,0.62)]"
         style={{
           minHeight: 'clamp(126px, 18vh, 170px)',
           background:
@@ -208,11 +210,10 @@ function QuestionPanel() {
 
         <textarea
           placeholder="พิมพ์คำถามของคุณ...(ไม่บังคับ)"
-          className="relative z-10 h-[112px] w-full resize-none bg-transparent pl-7 pr-7 pt-3 text-base leading-relaxed outline-none placeholder:text-[#b4a18d]/56"
+          className="relative z-10 h-[112px] w-full resize-none bg-transparent pl-7 pr-7 pt-3 text-base font-light leading-relaxed outline-none placeholder:text-[#f0e6d4]/82"
           style={{
             color: '#ead7ba',
             caretColor: '#d7b55d',
-            fontFamily: 'var(--font-playfair)',
           }}
         />
       </div>
@@ -224,16 +225,15 @@ function QuestionPanel() {
             key={`${chip}-${index}`}
             type="button"
             onClick={() => setSelected(index)}
-            className="relative box-border min-w-[104px] rounded-[5px] border px-3 py-1.5 text-[11px] shadow-[0_8px_16px_rgba(0,0,0,0.5)] sm:min-w-[92px] sm:px-4 sm:text-xs"
+            className={`topic-chip relative box-border min-w-[104px] rounded-[5px] border px-3 py-2 text-xs shadow-[0_8px_16px_rgba(0,0,0,0.5)] sm:min-w-[96px] sm:px-4 sm:text-sm${selected === index ? ' topic-chip--selected' : ''}`}
             style={{
-              color: selected === index ? '#f6df9c' : '#d2b470',
+              color: selected === index ? '#fff9eb' : '#f5ecd4',
               borderColor: selected === index ? '#e8c96f' : 'rgba(210,180,112,0.38)',
               background:
                 selected === index
                   ? 'linear-gradient(180deg, rgba(80,24,24,0.96), rgba(22,9,10,0.98))'
                   : 'linear-gradient(180deg, rgba(27,10,10,0.9), rgba(5,3,4,0.95))',
             }}
-            whileHover={{ y: -2, borderColor: '#e8c96f' }}
             whileTap={{ scale: 0.96 }}
           >
             {chip}
@@ -261,7 +261,7 @@ function OracleButton({
   return (
     <motion.button
       type="button"
-      className="relative h-12 min-w-[150px] overflow-hidden rounded-[8px] border px-6 text-base font-semibold sm:min-w-[180px] sm:px-9"
+      className="relative h-12 min-w-[150px] overflow-hidden rounded-[8px] border px-6 font-[family-name:var(--font-pridi)] text-base font-semibold tracking-wide sm:min-w-[180px] sm:px-9"
       style={{
         color: primary ? '#f3e4b7' : '#ead9a2',
         borderColor: primary ? 'rgba(244,226,163,0.72)' : 'rgba(232,203,129,0.62)',
@@ -311,9 +311,9 @@ function TableTarotFan() {
             borderColor: 'rgba(221,176,80,0.74)',
             boxShadow: '0 10px 22px rgba(0,0,0,0.42), inset 0 0 0 2px rgba(55,18,11,0.76)',
           }}
-          initial={false}
+          initial={{ opacity: 0, y: 28, rotate: card.r - 6 }}
           animate={{ opacity: 0.92, y: 0, rotate: card.r }}
-          transition={{ duration: 0.65, delay: 0.72 + index * 0.06 }}
+          transition={{ duration: 0.7, delay: 0.72 + index * 0.06, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="absolute inset-2 rounded-[4px] border border-[#e2b44d]/46" />
           <div className="absolute inset-0 flex items-center justify-center">
@@ -330,7 +330,7 @@ export default function FortuneTellingPage() {
     <main className="relative min-h-screen overflow-x-hidden bg-[#170607] text-[#ead7ba]">
       <div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/tarot-bg-symmetric.png')" }}
+        style={{ backgroundImage: "url('/tarot-bg-clean-stand.png')" }}
       />
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(54,9,25,0.08),rgba(10,0,2,0.34)_62%,rgba(8,0,0,0.68)_100%)]" />
       <div className="fixed inset-0 bg-[#230207]/16 mix-blend-multiply" />
@@ -342,15 +342,14 @@ export default function FortuneTellingPage() {
 
       <motion.header
         className="relative z-30 mx-auto w-full max-w-4xl px-5 pt-10 text-center md:pt-12"
-        initial={false}
+        initial={{ opacity: 0, y: -14 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
       >
         <h1
-          className="mb-2 text-[clamp(2rem,4.2vw,3.45rem)] font-semibold leading-tight"
+          className="mb-2 font-[family-name:var(--font-pridi)] text-[clamp(2rem,4.2vw,3.45rem)] font-semibold leading-tight tracking-wide"
           style={{
             color: '#e7c56c',
-            fontFamily: 'var(--font-playfair)',
             textShadow: '0 0 24px rgba(231,197,108,0.38), 0 3px 8px rgba(0,0,0,0.7)',
             overflowWrap: 'anywhere',
           }}
@@ -359,10 +358,9 @@ export default function FortuneTellingPage() {
         </h1>
         <OrnateDivider />
         <p
-          className="mx-auto max-w-[540px] text-[clamp(0.9rem,1.55vw,1.35rem)] leading-relaxed"
+          className="mx-auto max-w-[540px] text-[clamp(0.9rem,1.55vw,1.35rem)] font-light leading-relaxed"
           style={{
             color: 'rgba(231,218,197,0.76)',
-            fontFamily: 'var(--font-playfair)',
             textShadow: '0 2px 8px rgba(0,0,0,0.82)',
             overflowWrap: 'anywhere',
           }}
