@@ -123,3 +123,76 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* =========================================
+   Crystal Ball Animation
+========================================= */
+
+/* Container หลัก: กำหนดขนาดและใส่ Float Animation ให้ลอยขึ้นลง */
+.crystal-ball-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: float 4s ease-in-out infinite; /* เรียกลายเส้นแอนิเมชันลอยตัว */
+}
+
+/* 1. แสงออร่าด้านหลัง: ให้ขยายและหดตัว (Pulse) */
+.crystal-glow {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.6) 0%, rgba(168, 85, 247, 0) 70%);
+  animation: pulseGlow 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* 2. ตัวลูกแก้ว: สร้างมิติแสงและเงาให้ดูเป็นแก้ว 3D */
+.crystal-base {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  /* ถ้าใช้รูปภาพจริง ลบบรรทัด background และ box-shadow ออกได้เลย */
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3) 0%, rgba(120, 20, 180, 0.7) 50%, rgba(40, 0, 60, 0.9) 100%);
+  box-shadow: inset -20px -20px 40px rgba(0, 0, 0, 0.7), inset 10px 10px 20px rgba(255, 255, 255, 0.4);
+  z-index: 2;
+}
+
+/* 3. วงเวทมนตร์: ใส่แสงทะลุ (Blend Mode) และหมุน */
+.magic-circle {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  z-index: 3;
+  /* หัวใจหลัก! ทำให้สีขาวเรืองแสงและกลืนไปกับพื้นหลังสีม่วง ไม่ดูเป็นแผ่นสติกเกอร์แปะทับ */
+  mix-blend-mode: screen; 
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+  animation: spinSlow 20s linear infinite;
+}
+
+/* =========================================
+   Keyframes (ชุดคำสั่ง Animation)
+========================================= */
+
+/* แอนิเมชันลูกแก้วลอยขึ้น-ลง */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* แอนิเมชันออร่าเรืองแสงวาบ-ดับ */
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* แอนิเมชันวงเวทหมุนวนช้าๆ */
+@keyframes spinSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+

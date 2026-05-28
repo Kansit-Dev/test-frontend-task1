@@ -66,47 +66,21 @@ function FloatingEmbers() {
 function CrystalFocus() {
   return (
     <motion.div
-      className="pointer-events-none absolute left-1/2 z-20"
+      className="pointer-events-none absolute left-1/2 z-20 flex justify-center items-center"
       style={{
         top: 'clamp(250px, 42vh, 430px)',
-        width: 'clamp(142px, 15vw, 220px)',
-        height: 'clamp(142px, 15vw, 220px)',
         translateX: '-50%',
       }}
       initial={false}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
     >
-      <motion.div
-        className="absolute -inset-20 rounded-full"
-        style={{
-          background:
-            'radial-gradient(circle, rgba(175,83,255,0.52) 0%, rgba(97,25,137,0.26) 36%, transparent 68%)',
-          filter: 'blur(24px)',
-        }}
-        animate={{ opacity: [0.42, 0.88, 0.42], scale: [0.96, 1.12, 0.96] }}
-        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-      />
-
-      <motion.div
-        className="absolute inset-0 rounded-full"
-        style={{
-          background: `
-            radial-gradient(circle at 32% 22%, rgba(255,255,255,0.52), transparent 23%),
-            radial-gradient(circle at 58% 62%, rgba(255,255,255,0.42), transparent 8%),
-            radial-gradient(circle, rgba(202,123,255,0.72) 0%, rgba(132,35,215,0.72) 36%, rgba(38,6,58,0.92) 100%)
-          `,
-          boxShadow:
-            'inset 0 0 42px rgba(255,255,255,0.24), inset 0 0 80px rgba(170,85,255,0.65), 0 0 54px rgba(173,77,255,0.86), 0 0 112px rgba(173,77,255,0.34)',
-        }}
-        animate={{ y: [-5, 7, -5] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <motion.svg
+      <div className="crystal-ball-container">
+        <div className="crystal-glow"></div>
+        <div className="crystal-base"></div>
+        <svg
           viewBox="0 0 120 120"
-          className="absolute inset-[13%] h-[74%] w-[74%]"
-          animate={{ rotate: [0, 360] }}
-          transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
+          className="magic-circle"
         >
           <defs>
             <linearGradient id="oracle-line" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -123,8 +97,8 @@ function CrystalFocus() {
           />
           <circle cx="60" cy="60" r="42" fill="none" stroke="url(#oracle-line)" strokeWidth="1.4" />
           <circle cx="60" cy="60" r="23" fill="none" stroke="rgba(255,255,255,0.28)" strokeWidth="1" />
-        </motion.svg>
-      </motion.div>
+        </svg>
+      </div>
     </motion.div>
   )
 }
