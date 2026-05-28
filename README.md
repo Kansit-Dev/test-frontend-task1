@@ -6,13 +6,13 @@
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 (App Router)
+- **Framework:** Next.js 16 (App Router)
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS
+- **Styling:** Tailwind CSS v4
 - **Animation:** Framer Motion
-- **UI Components:** shadcn/ui
+- **UI Components:** shadcn/ui (available in repo)
 - **Icons:** Lucide React
-- **Font:** Playfair Display (Google Fonts)
+- **Fonts:** Playfair Display + Inter (Task 1) · Pridi + Sarabun (Task 2, รองรับไทย)
 
 ---
 
@@ -67,6 +67,13 @@
 
 **Responsive:** ทุก section ปรับจาก 1 column (mobile) → 3 columns (desktop) ด้วย Tailwind responsive prefix
 
+**Next.js practices:**
+- Server Components + `next/image` (Unsplash remote patterns)
+- Client เฉพาะ mobile navbar
+- Scroll-reveal sections (Framer `whileInView`)
+- OpenGraph / Twitter metadata
+- CSS design tokens (`--oracle-*`)
+
 ---
 
 ## โจทย์ที่ 2 — Online Fortune Telling Landing Page
@@ -84,16 +91,17 @@
 - Particle / Star Motion
 - Hover Interaction
 - Smooth Transition
+- Scroll Animation
 - Card Depth Movement
 - Blur / Glassmorphism Motion
 
 ### สิ่งที่พัฒนา
 
 **Mood & Tone:**  
-Dark mystical สีพื้นหลัง `#170607` (ดำแดงลึก), Tarot background image symmetric, โทนทอง (`#e7c56c`, `#d7b55d`) + ม่วง (`#b678ff`) สื่อถึงความศักดิ์สิทธิ์ ลึกลับ มีพลังงาน
+Dark mystical สีพื้นหลัง `#170607` (ดำแดงลึก), พื้นหลัง `tarot-bg-clean-stand.png`, โทนทอง (`#e7c56c`, `#d7b55d`) + ม่วง (`#b678ff`) สื่อถึงความศักดิ์สิทธิ์ ลึกลับ มีพลังงาน
 
 **Typography:**  
-`Playfair Display` ทั้งหน้า สีทอง พร้อม `textShadow` glow effect สื่อถึงความเป็น Oracle
+`Pridi` (หัวข้อ/ปุ่ม) + `Sarabun` (ข้อความ) รองรับภาษาไทย สีทองพร้อม `textShadow` glow
 
 **Layout & Sections:**
 
@@ -111,9 +119,9 @@ Dark mystical สีพื้นหลัง `#170607` (ดำแดงลึก
 | Animation | Implementation |
 |-----------|--------------|
 | **Floating Embers** | 26 particles สุ่มตำแหน่ง, ลอยขึ้น fade out, สีทอง + ม่วง พร้อม glow box-shadow |
-| **Crystal Ball Glow** | Radial gradient pulse `opacity [0.42 → 0.88 → 0.42]` + `scale [0.96 → 1.12]` |
-| **Crystal Ball Float** | `y: [-5, 7, -5]` loop, duration 4s easeInOut |
-| **Rotating Star Symbol** | SVG star + circle หมุน 360° ใน 24 วินาที linear |
+| **Crystal Ball Glow** | CSS `pulseGlow` + `crystalAura` บนลูกแก้ว (ไม่ลอยทั้งก้อน) |
+| **Rotating Star Symbol** | SVG หมุน 24 วินาที + เงา inset มิติภายในลูก |
+| **Scroll Reveal** | `whileInView` บน header และ question panel |
 | **Tarot Fan Entry** | ไพ่ animate เข้ามาทีละใบ stagger delay 0.06s |
 | **Chip Hover** | `y: -2` + border highlight เมื่อ hover |
 | **Button Hover** | `y: -3` + `scale: 1.02` smooth |
@@ -125,6 +133,11 @@ Question panel ใช้ `backdrop-filter: blur(7px)` + dark gradient background
 
 **Filigree SVG:**  
 ออกแบบ corner ornament SVG เองทั้ง 4 มุม — ใช้ `rotate-90/180/-90` เพื่อสะท้อนทิศทาง
+
+**Next.js practices:**
+- Server `page.tsx` + Client islands (`fortune-motion.tsx`)
+- ลูกแก้วใช้ `next/image` (local asset)
+- Chip hover ผ่าน CSS `@media (hover: hover)`
 
 ---
 

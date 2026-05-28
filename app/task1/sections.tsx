@@ -59,14 +59,21 @@ function ProductCard({
   name,
   price,
   image,
+  isNew = false,
 }: {
   name: string
   price: string
   image: string
+  isNew?: boolean
 }) {
   return (
     <article className="group cursor-pointer">
-      <div className="relative mb-4 aspect-[3/4] overflow-hidden rounded-lg bg-[#EDE8E1] transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-xl group-hover:shadow-[#2C1F14]/10">
+      <div className="relative mb-4 aspect-[3/4] overflow-hidden rounded-lg bg-[var(--oracle-sand)] transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-xl group-hover:shadow-[var(--oracle-ink)]/10">
+        {isNew ? (
+          <span className="absolute left-3 top-3 z-10 rounded bg-[var(--oracle-ink)] px-2 py-1 text-[10px] uppercase tracking-[0.18em] text-[var(--oracle-cream)]">
+            New
+          </span>
+        ) : null}
         <Image
           src={image}
           alt={name}
@@ -99,6 +106,14 @@ export function NewArrivals() {
           {PRODUCTS.map((product) => (
             <ProductCard key={product.name} {...product} />
           ))}
+        </div>
+        <div className="mt-14 text-center">
+          <Link
+            href="#lookbook"
+            className="text-xs uppercase tracking-[0.25em] text-[var(--oracle-taupe)] transition-colors hover:text-[var(--oracle-blush)]"
+          >
+            View full collection →
+          </Link>
         </div>
       </div>
     </section>

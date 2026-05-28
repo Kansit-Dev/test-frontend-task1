@@ -125,6 +125,16 @@
   }
 }
 
+/* Task 1 — design tokens */
+.task1-theme {
+  --oracle-cream: #faf7f2;
+  --oracle-sand: #ede8e1;
+  --oracle-ink: #2c1f14;
+  --oracle-taupe: #8b7355;
+  --oracle-blush: #d4a5a0;
+  --oracle-border: #d4c5b5;
+}
+
 /* Task 1 — utilities */
 .scrollbar-hide {
   -ms-overflow-style: none;
@@ -194,9 +204,9 @@
 
 /* 2. Crystal ball image — glow ที่ตัวลูก ไม่ขยับตำแหน่ง */
 .crystal-ball-img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
   object-fit: contain;
   z-index: 2;
   mix-blend-mode: screen;

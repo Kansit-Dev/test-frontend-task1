@@ -12,18 +12,21 @@ export const PRODUCTS = [
   {
     name: 'Silk Midi Dress',
     price: '$485',
+    isNew: true,
     image:
       'https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=600&h=800&fit=crop&q=80',
   },
   {
     name: 'Cashmere Cardigan',
     price: '$295',
+    isNew: true,
     image:
       'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=800&fit=crop&q=80',
   },
   {
     name: 'Linen Trousers',
     price: '$185',
+    isNew: false,
     image:
       'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&h=800&fit=crop&q=80',
   },
