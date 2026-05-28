@@ -382,6 +382,29 @@
   }
 }
 
+/* =========================================
+   Lookbook — Infinite Marquee Loop
+========================================= */
+
+@keyframes lookbook-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.lookbook-track {
+  display: flex;
+  width: max-content;
+  animation: lookbook-marquee 28s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover */
+@media (hover: hover) and (pointer: fine) {
+  .lookbook-scroll:hover .lookbook-track {
+    animation-play-state: paused;
+  }
+}
+
 /* Topic chips — hover เฉพาะอุปกรณ์ที่มีเมาส์ */
 .topic-chip {
   transition:

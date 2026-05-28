@@ -142,23 +142,61 @@ export function BrandStatement() {
 export function Lookbook() {
   return (
     <section id="lookbook" className="scroll-mt-24 bg-[#FAF7F2] px-6 py-24">
+      {/* Inject keyframe directly so it's guaranteed to load */}
+      <style>{`
+        @keyframes lookbook-marquee {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .lookbook-scroll:hover .lookbook-track-inner {
+          animation-play-state: paused;
+        }
+      `}</style>
+
       <div className="mx-auto max-w-7xl">
         <SectionHeading eyebrow="Editorial" title="Lookbook" />
-        <p className="-mt-10 mb-6 text-center text-xs uppercase tracking-[0.2em] text-[#8B7355] md:hidden">
-          Swipe to explore
-        </p>
-        <div className="lookbook-scroll relative">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[#FAF7F2] to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-[#FAF7F2] to-transparent" />
-          <div className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide">
+
+        {/* Marquee wrapper */}
+        <div className="lookbook-scroll relative overflow-hidden rounded-lg">
+          {/* fade edges */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#FAF7F2] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#FAF7F2] to-transparent" />
+
+          {/* Scrolling track */}
+          <div
+            className="lookbook-track-inner flex flex-row flex-nowrap gap-5 pb-4"
+            style={{
+              width: 'max-content',
+              animation: 'lookbook-marquee 28s linear infinite',
+              willChange: 'transform',
+            }}
+          >
+            {/* Set 1 */}
             {LOOKBOOK_IMAGES.map((item) => (
               <div
-                key={item.src}
+                key={`a-${item.src}`}
                 className="group relative aspect-[3/4] w-64 flex-shrink-0 cursor-pointer overflow-hidden rounded-lg transition-all duration-300 hover:shadow-xl hover:shadow-[#2C1F14]/10 md:w-72"
               >
                 <Image
                   src={item.src}
                   alt={item.alt}
+                  fill
+                  sizes="(max-width: 768px) 256px, 288px"
+                  className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  placeholder="empty"
+                />
+              </div>
+            ))}
+            {/* Set 2 — duplicate for seamless loop */}
+            {LOOKBOOK_IMAGES.map((item) => (
+              <div
+                key={`b-${item.src}`}
+                aria-hidden="true"
+                className="group relative aspect-[3/4] w-64 flex-shrink-0 cursor-pointer overflow-hidden rounded-lg transition-all duration-300 hover:shadow-xl hover:shadow-[#2C1F14]/10 md:w-72"
+              >
+                <Image
+                  src={item.src}
+                  alt=""
                   fill
                   sizes="(max-width: 768px) 256px, 288px"
                   className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
@@ -172,6 +210,8 @@ export function Lookbook() {
     </section>
   )
 }
+
+
 
 function TestimonialCard({
   quote,

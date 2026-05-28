@@ -1,18 +1,34 @@
 # Frontend Test — CodeLab Dev
 
-ผลงานทดสอบทักษะ Frontend โดย **Kantasit** ประกอบด้วย 2 โจทย์
+> ผลงานทดสอบทักษะ Frontend โดย **Kantasit** ประกอบด้วย 2 โจทย์
 
 ---
 
-## Tech Stack
+## 🛠 Tech Stack
 
-- **Framework:** Next.js 16 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS v4
-- **Animation:** Framer Motion
-- **UI Components:** shadcn/ui (available in repo)
-- **Icons:** Lucide React
-- **Fonts:** Playfair Display + Inter (Task 1) · Pridi + Sarabun (Task 2, รองรับไทย)
+| Category | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Animation | Framer Motion |
+| UI Components | shadcn/ui + Radix UI |
+| Icons | Lucide React |
+| Fonts | Playfair Display + Inter (Task 1) · Pridi + Sarabun (Task 2) |
+
+---
+
+## 📁 Project Structure
+
+```
+app/
+├── task1/          # Fashion & Lifestyle Landing Page
+└── task2/          # Online Fortune Telling Landing Page
+components/
+├── ui/             # shadcn/ui components
+├── scroll-reveal.tsx
+└── theme-provider.tsx
+```
 
 ---
 
@@ -38,19 +54,19 @@
 
 **Brand Concept:** *ORACLE* — แบรนด์แฟชั่น Quiet Luxury สำหรับผู้หญิงยุคใหม่
 
-**Mood & Tone:**  
+**Mood & Tone:**
 ใช้โทนสี Warm Neutral (`#FAF7F2`, `#EDE8E1`, `#2C1F14`, `#8B7355`, `#D4A5A0`) สื่อถึงความ elegant เรียบหรู และ timeless ด้วยพื้นครีมอุ่น ตัดกับน้ำตาลเข้มแบบ Quiet Luxury
 
-**Typography:**  
-`Playfair Display` สำหรับ Heading และ Logo — สื่อถึงความ Editorial และ Premium  
-`sans-serif` ละเอียดพร้อม letter-spacing สูงสำหรับ body text และ label
+**Typography:**
+- `Playfair Display` — Heading & Logo สื่อความ Editorial และ Premium
+- `sans-serif` letter-spacing สูง — Body text และ Label
 
 **Layout & Sections:**
 
 | Section | รายละเอียด |
-|---------|-----------|
+|---|---|
 | **Navbar** | Fixed top, backdrop blur, centered logo "ORACLE", nav links สองฝั่ง |
-| **Hero** | Full-screen, background image จาก Unsplash พร้อม gradient overlay, headline ขนาดใหญ่, CTA button |
+| **Hero** | Full-screen, background image จาก Unsplash + gradient overlay, headline ขนาดใหญ่, CTA button |
 | **New Arrivals** | 3-column product grid, aspect-ratio 3:4, hover scale + shadow |
 | **Brand Statement** | Full-width quote section, italic Playfair, centered |
 | **Lookbook** | Horizontal scroll gallery, 5 editorial images |
@@ -59,6 +75,7 @@
 | **Footer** | Logo, social icons (Instagram, Twitter, Facebook), copyright |
 
 **Interactions & Detail:**
+
 - Product card: `scale-[1.02]` + `shadow-xl` on hover, inner image zoom `scale-105`
 - Lookbook: horizontal scroll พร้อม image zoom on hover
 - Navbar: `backdrop-blur-sm` + semi-transparent background
@@ -69,7 +86,7 @@
 
 **Next.js practices:**
 - Server Components + `next/image` (Unsplash remote patterns)
-- Client เฉพาะ mobile navbar
+- Client island เฉพาะ mobile navbar
 - Scroll-reveal sections (Framer `whileInView`)
 - OpenGraph / Twitter metadata
 - CSS design tokens (`--oracle-*`)
@@ -82,76 +99,95 @@
 
 ### โจทย์
 
-ออกแบบและพัฒนา Landing Page สำหรับเว็บไซต์ดูดวงออนไลน์ โดยอ้างอิงจาก Reference Design ที่ได้รับ ต้องสามารถถ่ายทอด Mood & Tone, Layout, Animation และความรู้สึกโดยรวมให้ใกล้เคียงต้นฉบับมากที่สุด (ประมาณ 90% ขึ้นไป)
+ออกแบบและพัฒนา Landing Page สำหรับเว็บไซต์ดูดวงออนไลน์ โดยอ้างอิงจาก Reference Design ที่ได้รับ ต้องสามารถถ่ายทอด Mood & Tone, Layout, Animation และความรู้สึกโดยรวมให้ใกล้เคียงต้นฉบับมากที่สุด (~90% ขึ้นไป)
 
 ### Animation ที่ต้องมี
 
-- Floating Effect
-- Glow Animation
-- Particle / Star Motion
-- Hover Interaction
-- Smooth Transition
-- Scroll Animation
-- Card Depth Movement
-- Blur / Glassmorphism Motion
+| รายการ | ✅ |
+|---|---|
+| Floating Effect | ✓ |
+| Glow Animation | ✓ |
+| Particle / Star Motion | ✓ |
+| Hover Interaction | ✓ |
+| Smooth Transition | ✓ |
+| Scroll Animation | ✓ |
+| Card Depth Movement | ✓ |
+| Blur / Glassmorphism Motion | ✓ |
 
 ### สิ่งที่พัฒนา
 
-**Mood & Tone:**  
-Dark mystical สีพื้นหลัง `#170607` (ดำแดงลึก), พื้นหลัง `tarot-bg-clean-stand.png`, โทนทอง (`#e7c56c`, `#d7b55d`) + ม่วง (`#b678ff`) สื่อถึงความศักดิ์สิทธิ์ ลึกลับ มีพลังงาน
+**Mood & Tone:**
+Dark mystical สีพื้นหลัง `#170607` (ดำแดงลึก), ประกอบกับ `tarot-bg-clean-stand.png`, โทนทอง (`#e7c56c`, `#d7b55d`) + ม่วง (`#b678ff`) สื่อถึงความศักดิ์สิทธิ์ ลึกลับ มีพลังงาน
 
-**Typography:**  
-`Pridi` (หัวข้อ/ปุ่ม) + `Sarabun` (ข้อความ) รองรับภาษาไทย สีทองพร้อม `textShadow` glow
+**Typography:**
+- `Pridi` — หัวข้อ & ปุ่ม
+- `Sarabun` — ข้อความ, รองรับภาษาไทย
+- สีทองพร้อม `textShadow` glow effect
 
 **Layout & Sections:**
 
 | Section | รายละเอียด |
-|---------|-----------|
-| **Background** | Fixed tarot background image + radial gradient overlay + color mixing layer + bottom vignette |
-| **Header** | คำถาม "คุณอยากถามเรื่องอะไร?" พร้อม ornate gold divider ด้านล่าง |
-| **Question Panel** | Glassmorphism dark card พร้อม filigree corner SVG ทั้ง 4 มุม, textarea สำหรับพิมพ์คำถาม |
+|---|---|
+| **Background** | Fixed tarot image + radial gradient overlay + color mixing layer + bottom vignette |
+| **Header** | คำถาม "คุณอยากถามเรื่องอะไร?" พร้อม ornate gold divider |
+| **Question Panel** | Glassmorphism dark card + filigree corner SVG ทั้ง 4 มุม + textarea |
 | **Topic Chips** | 8 หัวข้อดวง พร้อม selected state highlight สีทอง |
-| **CTA Buttons** | "เริ่มเลือกไพ่" (เขียว) / "ข้าม" (ทอง) พร้อม ornament ด้านข้าง |
-| **Tarot Fan** | ไพ่ทาโรต์ 8 ใบแผ่เป็น fan โค้งตรงด้านล่าง |
+| **CTA Buttons** | "เริ่มเลือกไพ่" (เขียว) / "ข้าม" (ทอง) + ornament ด้านข้าง |
+| **Tarot Fan** | ไพ่ทาโรต์ 8 ใบแผ่เป็น fan โค้งด้านล่าง |
 
-**Animations (ทั้งหมดใช้ Framer Motion):**
+**Animations (Framer Motion):**
 
 | Animation | Implementation |
-|-----------|--------------|
-| **Floating Embers** | 26 particles สุ่มตำแหน่ง, ลอยขึ้น fade out, สีทอง + ม่วง พร้อม glow box-shadow |
-| **Crystal Ball Glow** | CSS `pulseGlow` + `crystalAura` บนลูกแก้ว (ไม่ลอยทั้งก้อน) |
-| **Rotating Star Symbol** | SVG หมุน 24 วินาที + เงา inset มิติภายในลูก |
+|---|---|
+| **Floating Embers** | 26 particles สุ่มตำแหน่ง, ลอยขึ้น fade out, สีทอง + ม่วง + glow |
+| **Crystal Ball Glow** | CSS `pulseGlow` + `crystalAura` บนลูกแก้ว |
+| **Rotating Star Symbol** | SVG หมุน 24 วินาที + เงา inset มิติ |
 | **Scroll Reveal** | `whileInView` บน header และ question panel |
-| **Tarot Fan Entry** | ไพ่ animate เข้ามาทีละใบ stagger delay 0.06s |
-| **Chip Hover** | `y: -2` + border highlight เมื่อ hover |
+| **Tarot Fan Entry** | animate เข้ามาทีละใบ stagger delay 0.06s |
+| **Chip Hover** | `y: -2` + border highlight |
 | **Button Hover** | `y: -3` + `scale: 1.02` smooth |
 | **Header Fade-in** | `opacity: 0 → 1` + `y: -10 → 0` on mount |
 | **Question Panel Slide** | `opacity + y` transition delay 0.42s |
 
-**Glassmorphism:**  
+**Glassmorphism:**
 Question panel ใช้ `backdrop-filter: blur(7px)` + dark gradient background + gold border `rgba(213,178,91,0.42)` + inner border double layer
 
-**Filigree SVG:**  
+**Filigree SVG:**
 ออกแบบ corner ornament SVG เองทั้ง 4 มุม — ใช้ `rotate-90/180/-90` เพื่อสะท้อนทิศทาง
 
 **Next.js practices:**
-- Server `page.tsx` + Client islands (`fortune-motion.tsx`)
+- Server `page.tsx` + Client island (`fortune-motion.tsx`)
 - ลูกแก้วใช้ `next/image` (local asset)
 - Chip hover ผ่าน CSS `@media (hover: hover)`
 
 ---
 
-## การรัน
+## 🚀 การรัน
 
 ```bash
-npm i
+# ติดตั้ง dependencies
+npm install
+# หรือ
+pnpm install
+
+# Development mode
+npm run dev
+
+# Build สำหรับ production
 npm run build
-npm run dev   # หรือ npm start
+npm start
 ```
 
-เปิด [http://localhost:3000](http://localhost:3000)
+เปิด [http://localhost:3000](http://localhost:3000) ในเบราว์เซอร์
 
 | Path | หน้า |
-|------|------|
-| `/task1` | Fashion Landing Page |
+|---|---|
+| `/` | Home |
+| `/task1` | Fashion Landing Page (ORACLE) |
 | `/task2` | Fortune Telling Page |
+
+---
+
+## 👤 Author
+
+**Kantasit** — Frontend Test @ CodeLab Dev

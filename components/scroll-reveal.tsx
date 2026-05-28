@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useInView, useMotionValue, useTransform } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 
 export function ScrollReveal({
@@ -12,13 +13,16 @@ export function ScrollReveal({
   className?: string
   delay?: number
 }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { margin: '-60px', once: false })
+
   return (
     <motion.div
+      ref={ref}
       className={className}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
       initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.75, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.65, delay: isInView ? delay : 0, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </motion.div>
